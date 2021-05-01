@@ -1,8 +1,8 @@
-"""first plannet model and endpoint route
+"""empty message
 
-Revision ID: 4e0e69753422
+Revision ID: e64ae17ad3a3
 Revises: 
-Create Date: 2021-04-30 15:53:21.251883
+Create Date: 2021-04-30 16:45:18.095202
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4e0e69753422'
+revision = 'e64ae17ad3a3'
 down_revision = None
 branch_labels = None
 depends_on = None

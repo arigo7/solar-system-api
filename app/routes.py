@@ -8,6 +8,7 @@ from flask import jsonify
 # creating instance of the class, first arg is name of app's module
 planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
+#Update a planet
 @planet_bp.route("/<planet_id>", methods=["PUT"])
 def update_planet(planet_id):
     planet = Planet.query.get(planet_id)
@@ -23,6 +24,18 @@ def update_planet(planet_id):
     return {"success": False,
             "message": f"Planet #{planet_id} was not found"
             }, 404
+
+#Delete a planet
+@planet_bp.route("/<planet_id>", methods=["DELETE"])
+def delete_planet(planet_id):
+    planet = Planet.query.get(planet_id)
+    if planet:
+        db.session.delete(planet)
+        db.session.commit()
+        return {"success": True,
+                "message": f"Planet {planet.id} successfully deleted" }, 201
+    return {"success": False,
+            "message": f"Planet {planet_id} was not found" }, 404
 
 #create a planet
 @planet_bp.route("", methods = ["POST"], strict_slashes = False)

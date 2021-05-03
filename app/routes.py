@@ -8,6 +8,22 @@ from flask import jsonify
 # creating instance of the class, first arg is name of app's module
 planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
+@planet_bp.route("/<planet_id>", methods=["PUT"])
+def update_planet(planet_id):
+    planet = Planet.query.get(planet_id)
+    if planet: # successful updating planet
+        form_data = request.get_json() # save user input form_data as json format 
+        planet.title = form_data["name"] # updating model? title field language?
+        planet.description = form_data["description"] # updating model description field for planet = planet_id
+        planet.radius = form_data["radius"]
+        db.session.commit()
+        return {"success": True,
+                "message": f"Planet #{planet.id}, successfully updated"
+                }, 201
+    return {"success": False,
+            "message": f"Planet #{planet_id} was not found"
+            }, 404
+
 #create a planet
 @planet_bp.route("", methods = ["POST"], strict_slashes = False)
 def handle_planet_data():

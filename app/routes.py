@@ -3,7 +3,7 @@ from flask import Blueprint
 from .models.planet import Planet
 from flask import request
 from flask import jsonify 
-
+# checking they all work 
 # creating instance of the class, first arg is name of app's module
 planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 

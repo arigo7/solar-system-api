@@ -4,7 +4,6 @@ from .models.planet import Planet
 from flask import request
 from flask import jsonify 
 
-
 # creating instance of the class, first arg is name of app's module
 planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
@@ -42,6 +41,7 @@ def delete_planet(planet_id):
 def handle_planet_data():
     request_body = request.get_json()
     
+    # returns response if body of request is empty
     if request_body == None:
         return {"success": False, "message": f"Please provide planet info" }, 404
 
@@ -50,37 +50,37 @@ def handle_planet_data():
                     radius = request_body["radius"]) 
     db.session.add(new_planet) # "adds model to the db"
     db.session.commit() # does the action above
-    # return (f"Book #{new_book.title} has been created", 201)
-
     return {"success": True,
             "message": f"Planet {new_planet.name} has been created"
             }, 201
 
-#Retrive all planet  
-
+#Retrieve all planets  
 @planet_bp.route("", methods = ["GET"], strict_slashes = False)
 def retrieve_planets_data():
     #request.method == "GET":
         planets = Planet.query.all()
-        planets_response = []
-        for planet in planets:
-            planets_response.append({
-                "id": planet.id,
-                "name": planet.name,
-                "description": planet.description,
-                "radius": planet.radius,
-            })
-        return jsonify(planets_response), 200  # returning the list of all planets
+        if planets != None:
+            planets_response = []
+            for planet in planets:
+                planets_response.append({
+                    "id": planet.id,
+                    "name": planet.name,
+                    "description": planet.description,
+                    "radius": planet.radius,
+                })
+            return jsonify(planets_response), 200  # returning the list of all planets
+        return {"success": False, "message": f"There are no planets" }, 404
 
 #Retrieve one planet
-
 @planet_bp.route("/<planet_id>", methods=["GET"])
 def retrieve_single_planet(planet_id):
     planet = Planet.query.get(planet_id)
-
-    return {
-        "id": planet.id,
-        "name": planet.name,
-        "description": planet.description,
-        "radius": planet.radius,
-    }
+    if planet:
+        return {
+            "id": planet.id,
+            "name": planet.name,
+            "description": planet.description,
+            "radius": planet.radius,
+        }
+    return {"success": False,
+            "message": f"Planet {planet_id} was not found" }, 404

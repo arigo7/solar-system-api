@@ -13,7 +13,7 @@ def update_planet(planet_id):
     planet = Planet.query.get(planet_id)
     if planet: # successful updating planet
         form_data = request.get_json() # save user input form_data as json format 
-        planet.title = form_data["name"] # updating model? title field language?
+        planet.name = form_data["name"] # updating model? title field language?
         planet.description = form_data["description"] # updating model description field for planet = planet_id
         planet.radius = form_data["radius"]
         db.session.commit()

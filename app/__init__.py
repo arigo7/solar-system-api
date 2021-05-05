@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from dotenv import load_dotenv # this allows us to bring our env variables from .env
+from dotenv import load_dotenv # this allows us to bring our .env variables from .env
 import os # allow us to get those env variables with the method
 
 db = SQLAlchemy()

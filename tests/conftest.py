@@ -7,8 +7,8 @@ def app():
     app = create_app({"TESTING": True})
 
     with app.app_context():
-    db.create_all()
-    yield app
+        db.create_all()
+        yield app
 
     with app.app_context():
         db.drop_all()

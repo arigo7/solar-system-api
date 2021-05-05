@@ -36,8 +36,8 @@ def two_saved_planets(app):
 @pytest.fixture
 def create_one_planet(app):
     # Arrange
-    planet_three = Planet(name="Three Planet",
-                        description="threeeeee",
-                        radius = 12.3)
-    db.session.add(planet_three)
-    db.session.commit()
+    return{
+        "description": "Another Fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.",
+        "name": "Another Mars",
+        "radius": 2106.1
+    }

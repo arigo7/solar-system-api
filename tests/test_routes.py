@@ -33,11 +33,11 @@ def test_create_one_planet(client, create_one_planet):
     # to the name 
 
     assert response.status_code == 201
-    # assert response_body == {
-    #     "description": "Another Fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.",
-    #     "name": "Another Mars",
-    #     "radius": 2106.1
-    # }
+    assert response_body == {
+        "description": "Another Fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.",
+        "name": "Another Mars",
+        "radius": 2106.1
+    }
     
     # {
     # "message": f"Planet {request_body['name']} has been created",

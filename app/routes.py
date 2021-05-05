@@ -43,10 +43,10 @@ def handle_planet_data():
     request_body = request.get_json()
 
     #returns response if body of request is empty
-    if request_body == None or request_body["name"] == None \
-        or request_body["description"] == None \
-            or request_body["radius"] == None:
-        return {"success": False, "message": f"Please provide planet info" }, 404
+    # if request_body == None or request_body["name"] == None \
+    #     or request_body["description"] == None \
+    #         or request_body["radius"] == None:
+    #     return {"success": False, "message": f"Please provide planet info" }, 404
 
     new_planet = Planet(name=request_body["name"],
                     description=request_body["description"],

@@ -40,7 +40,7 @@ def delete_planet(planet_id):
 @planet_bp.route("", methods = ["POST"], strict_slashes = False)
 def handle_planet_data():
     request_body = request.get_json()
-    
+
     # returns response if body of request is empty
     if request_body == None:
         return {"success": False, "message": f"Please provide planet info" }, 404

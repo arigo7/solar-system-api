@@ -32,3 +32,12 @@ def two_saved_planets(app):
     # db.session.add(one_planet)
     # db.session.add(two-planet)
     db.session.commit()
+#POST /planets with a JSON request body returns a 201
+@pytest.fixture
+def create_one_planet(app):
+    # Arrange
+    planet_three = Planet(name="Three Planet",
+                        description="threeeeee",
+                        radius = 12.3)
+    db.session.add(planet_three)
+    db.session.commit()

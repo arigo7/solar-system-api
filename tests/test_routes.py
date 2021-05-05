@@ -26,3 +26,13 @@ def test_get_planet_by_id(client, two_saved_planets):
     #     "description": "",
     #     "radius": None}
 
+# get one planet by id
+def test_create_one_planet(client, create_one_planet):
+    response = client.post('/planets')
+    response_body = response.get_json()
+
+    assert response.status_code == 201
+    assert response_body == {
+            "success": True,
+            "message": f"Planet {request_body.get("name")} has been created"
+    }

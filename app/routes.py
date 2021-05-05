@@ -60,30 +60,33 @@ def handle_planet_data():
 #Retrieve all planets  
 @planet_bp.route("", methods = ["GET"], strict_slashes = False)
 def retrieve_planets_data():
+    # return make_response("I'm a teapot!", 418)  # to fail first test intentionally!
     #request.method == "GET":
-        planets = Planet.query.all()
-        if planets != None:
-            planets_response = []
-            for planet in planets:
-                planets_response.append({
-                    "id": planet.id,
-                    "name": planet.name,
-                    "description": planet.description,
-                    "radius": planet.radius,
-                })
-            return jsonify(planets_response), 200  # returning the list of all planets
-        return {"success": False, "message": f"There are no planets" }, 404
+    planets = Planet.query.all()
+    if planets != None:
+        planets_response = []
+        for planet in planets:
+            planets_response.append({
+                "id": planet.id,
+                "name": planet.name,
+                "description": planet.description,
+                "radius": planet.radius,
+            })
+        return jsonify(planets_response), 200  # returning the list of all planets
+        
+    return {"success": False, "message": f"There are no planets" }, 404
 
 #Retrieve one planet
 @planet_bp.route("/<planet_id>", methods=["GET"])
 def retrieve_single_planet(planet_id):
     planet = Planet.query.get(planet_id)
-    if planet:
+    if planet != None:
         return {
             "id": planet.id,
             "name": planet.name,
             "description": planet.description,
             "radius": planet.radius,
         }
-    return {"success": False,
+    else:
+        return {"success": False,
             "message": f"Planet {planet_id} was not found" }, 404

@@ -28,14 +28,14 @@ def test_get_planet_by_id(client, two_saved_planets):
 
 # get one planet by id
 def test_create_one_planet(client, create_one_planet):
-    response = client.post('/planets')
+    response = client.post('/planets', json=create_one_planet)
     response_body = response.get_json() # we might need to check into this compared
     # to the name 
 
     assert response.status_code == 201
     assert response_body == {
     "message": "Planet Another Mars has been created",
-    "success": true
+    "success": True
 }
     # {
     #     "description": "Another Fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury.",

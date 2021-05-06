@@ -25,8 +25,9 @@ def create_app(test_config=None): # this parameter _ how does it know where our 
     migrate.init_app(app, db)
 
     #integrate model
-    from app.models.planet import Planet
-    from .routes import planet_bp
-    app.register_blueprint(planet_bp)
+    from app.models.planet import Planet # grabbing my models
+    from .routes import planet_bp # where my routes are
+    app.register_blueprint(planet_bp) # grabbing blue prints
 
+#grabbing it all from everywhere to be able to run my app
     return app

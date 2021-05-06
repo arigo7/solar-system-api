@@ -39,11 +39,27 @@ def delete_planet(planet_id):
 #create a planet
 @planet_bp.route("", methods = ["POST"], strict_slashes = False)
 def handle_planet_data():
-    
     request_body = request.get_json()
 
-    #returns response if body of request is empty
-    # if request_body == None or request_body["name"] == None \
+    # method has_key check it out
+    # name_key = request_body.has_key('name')
+    # description_key = request_body.has_key('description')
+    # radius_key = request_body.has_key('radius')
+
+    # if request_body == None or request_body.has_key("name") == None \
+    #     or request_body.has("description") == None \
+    #         or request_body.has_key("radius") == None:
+    #     return {"success": False, "message": f"Please provide planet info" }, 404 
+    # 
+    # THIS WORKS, gets 404 response if name is missing
+    if request_body == None or request_body.get("name") == None \
+        or request_body.get("description") == None \
+            or request_body.get("radius") == None:
+        return {"success": False, "message": f"Please provide planet info" }, 404
+
+
+    ## returns response 404 if body of request is empty
+    # if request_body == None or request_body.has_key ["name"] == None \
     #     or request_body["description"] == None \
     #         or request_body["radius"] == None:
     #     return {"success": False, "message": f"Please provide planet info" }, 404
